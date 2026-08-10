@@ -8,7 +8,7 @@ parameters:
   image:
     type: string
     description: Image name
-    default: Ubuntu 22.04 Jammy Jellyfish x86_64
+    default: Ubuntu 24.04 Noble Numbat x86_64
   boot_volume_size:
     type: number
     description: Boot volume size
