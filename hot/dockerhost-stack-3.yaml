@@ -44,6 +44,11 @@ resources:
           delete_on_termination: true
           image: { get_param: image }
           volume_size: { get_param: boot_volume_size }
+          boot_index: 0
+        - device_name: vdb
+          delete_on_termination: false
+          volume_id: { get_resource: my_data_volume }
+          boot_index: -1
       config_drive: { get_param: config_drive }
       user_data: { get_resource: my_config }
       user_data_format: RAW
@@ -53,12 +58,6 @@ resources:
     properties:
       size: { get_param: data_volume_size }
       name: persistent_data
-
-  my_volume_attachment:
-    type: "OS::Cinder::VolumeAttachment"
-    properties:
-      instance_uuid: { get_resource: my_dockerhost }
-      volume_id: { get_resource: my_data_volume }
 
   my_dockerhost_management_port:
     type: "OS::Neutron::Port"
